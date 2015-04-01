@@ -42,14 +42,23 @@ def peakfinder_2d(array):
     @param: array - a non-empty array
     @exception: raised if the array is empty
     """
-    rows = len(array)
-    columns = 0
-    if rows > 0:
-        columns = len(array[0])
+    columns = len(array)
+    rows = 1
+    if columns  > 0:
+        rows = len(array[0])
+    else: 
+        return max(array[0])
 
+    (row_max, index) = find_max_index(array[rows/2])
 
-    (col_max, max_index) = find_max_index(array[
-    
+    # Determine whether to continue searching  in the upper half or in the 
+    # lower half of the of the matrix.
+    if(array[rows/2-1][index] >= array[rows/2][index]):
+        # continue with upper half
+    elif(array[rows/2+1][index] >= array[rows/2][index]):
+        # continue with lower half
+    else:
+        return array[rows/2][index]  # The current element is a peak.
 
 
 

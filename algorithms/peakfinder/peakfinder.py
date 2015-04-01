@@ -42,26 +42,37 @@ def peakfinder_2d(array):
     @param: array - a non-empty array
     @exception: raised if the array is empty
     """
-    columns = len(array)
-    rows = 1
-    if columns  > 0:
-        rows = len(array[0])
-    else: 
+    rows = len(array)
+    columns = len(array[0]) if type(array[0]) is list  else 0
+
+    # This is a single list. Interpreted as a single column
+    if columns ==  0:
+        return max(array)
+
+    # This is a list with list elements of length 1. So also a single column
+    # but one that requires some preprocessing.
+    elif columns == 1: 
+        return max([x[0] for x in array])
+
+    # special case for if there are only two rows.
+    if rows == 1:
         return max(array[0])
+    elif rows == 2:
+        return max(array[0] + array[1])
 
     (row_max, index) = find_max_index(array[rows/2])
 
     # Determine whether to continue searching  in the upper half or in the 
     # lower half of the of the matrix.
+    #
     if(array[rows/2-1][index] >= array[rows/2][index]):
-        # continue with upper half
+        return peakfinder_2d(array[:rows/2-1])
+
     elif(array[rows/2+1][index] >= array[rows/2][index]):
-        # continue with lower half
+        return peakfinder_2d(array[rows/2+1:])
+
     else:
         return array[rows/2][index]  # The current element is a peak.
-
-
-
 
 
 def find_max_index(array):
@@ -71,13 +82,14 @@ def find_max_index(array):
     """
     max_ = max(array)
     index = array.index(max_) 
-    return (index, max_)
+    return (max_, index)
 
 
 
 
 
 # TODO: Try matrices using numpy
+# TODO: Try non-recursive versions of the algorithms - for large n.
 
 if __name__ == "__main__":
     print "Provide an array to search: "

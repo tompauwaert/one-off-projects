@@ -1,0 +1,6 @@
+TODO:
+
+- Write unit tests
+- Write the algorithms in non-recursive form
+- Write the algorithms using numpy
+

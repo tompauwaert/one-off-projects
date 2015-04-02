@@ -84,10 +84,6 @@ def find_max_index(array):
     index = array.index(max_) 
     return (max_, index)
 
-
-
-
-
 # TODO: Try matrices using numpy
 # TODO: Try non-recursive versions of the algorithms - for large n.
 

@@ -46,6 +46,68 @@ class PeakFinder1DTestCase(unittest.TestCase):
         self.assertEqual(peakfinder_1d([-356 for _ in range(100)]), -356, 
                 "Wrong peak detected")
 
+    def test_peakfind1(self):
+        a = [1,2]
+        self.assertEqual(peakfinder_1d(a), 2,
+                "Wrong peak element")
+
+    def test_peakfind2(self):
+        a = [1,2,3]
+        self.assertEqual(peakfinder_1d(a), 3,
+                "Wrong peak element")
+
+    def test_peakfind3(self):
+        a = [3,2,1]
+        self.assertEqual(peakfinder_1d(a), 3,
+                "Wrong peak element")
+
+    def test_peakfind4(self):
+        a = [1,2,3,4]
+        self.assertEqual(peakfinder_1d(a), 4,
+                "Wrong peak element")
+
+    def test_peakfind5(self):
+        a = [4,3,2,1]
+        self.assertEqual(peakfinder_1d(a), 4,
+                "Wrong peak element")
+
+    def test_peakfind6(self):
+        a = [-1,4,2,0]
+        self.assertEqual(peakfinder_1d(a), 4,
+                "Wrong peak element")
+
+    def test_peakfind7(self):
+        a = [-1,2,4,0]
+        self.assertEqual(peakfinder_1d(a), 4,
+                "Wrong peak element")
+
+    def test_peakfind8(self):
+        a = [-1,2,4,0,8,2]
+        # TODO: Change to assert in
+        self.assertEqual(peakfinder_1d(a), 4,
+                "Wrong peak element")
+
+    def test_peakfind9(self):
+        a = [-1,2,4,0,8,2]
+        a = a.reverse()
+        # TODO: Change to assert in
+        self.assertEqual(peakfinder_1d(a), 4,
+                "Wrong peak element")
+
+    def test_peakfind10(self):
+        a = [10,3,2,0,5,-1,2,4,0,8,2]
+        #a = [2,8,0,4,2,-1,5,0,2,3,10]
+        a = a.reverse()
+        # TODO: Change to assert in
+        self.assertEqual(peakfinder_1d(a), 4,
+                "Wrong peak element")
+
+    def test_peakfind11(self):
+        a = [10,3,2,0,5,-1,2,4,0,8,2]
+        # TODO: Change to assert in
+        self.assertEqual(peakfinder_1d(a), 4,
+                "Wrong peak element")
+
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(PeakFinder1DTestCase)
     unittest.TextTestRunner(verbosity=2).run(suite)

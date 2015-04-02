@@ -25,9 +25,9 @@ def peakfinder_1d(array):
         return max(array)
     else:
         return peakfinder_1d(
-                array[:len(array)/2-1] 
+                array[:len(array)/2] 
                 if (array[len(array)/2-1] >= array[len(array)/2])
-                else array[len(array)/2+1:]
+                else array[max(len(array)-1, len(array)/2+1):]
                 )
 
 

@@ -24,11 +24,12 @@ def peakfinder_1d(array):
     elif len(array) == 2: 
         return max(array)
     else:
-        return peakfinder_1d(
-                array[:len(array)/2] 
-                if (array[len(array)/2-1] >= array[len(array)/2])
-                else array[max(len(array)-1, len(array)/2+1):]
-                )
+        if (array[len(array)/2-1] >= array[len(array)/2]):
+            return peakfinder_1d(array[:len(array)/2])
+        elif (array[len(array)/2+1] >= array[len(array)/2]):
+            return peakfinder_1d(array[max(len(array)-1, len(array)/2+1):])
+        else:
+            return array[len(array)/2]
 
 
 def peakfinder_2d(array):

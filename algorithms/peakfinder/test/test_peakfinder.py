@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.abspath(".."))
 
 import unittest
 from peakfinder import peakfinder_1d
+from peakfinder import peakfinder_2d
 
 class PeakFinder1DTestCase(unittest.TestCase):
 
@@ -128,6 +129,351 @@ class PeakFinder1DTestCase(unittest.TestCase):
         peaks = [10,5,4,8]
         self.assertIn(peak, peaks,
                 "Wrong peak element {0}; expected {1}".format(peak,peaks))
+
+
+class PeakFinder2DTestCase(unittest.TestCase):
+
+    def test_peakfind2_empty1(self):
+        a = []
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+    def test_peakfind2_empty2(self):
+        a = [[]]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+    def test_peakfind2_empty3(self):
+        a = [[],[]]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+    def test_peakfind2_empty4(self):
+        a = [[] for _ in range(3)]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+    def test_peakfind2_empty5(self):
+        a = [[] for _ in range(4)]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+    def test_peakfind2_empty5(self):
+        a = [[] for _ in range(5)]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+        a = [[] for _ in range(6)]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+        a = [[] for _ in range(7)]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+        a = [[] for _ in range(8)]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+        a = [[] for _ in range(9)]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+        a = [[] for _ in range(10)]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+        a = [[] for _ in range(30)]
+        self.assertRaises(ValueError, peakfinder_2d, a)
+
+    def test_peakfind2_2d_row(self):
+        a = [1]
+        peaks = 1
+        peak = peakfinder_2d(a)
+        self.assertEqual(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [1,2,3,4]
+        peaks = 4
+        peak = peakfinder_2d(a)
+        self.assertEqual(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [4,3,2,1]
+        peaks = 4
+        peak = peakfinder_2d(a)
+        self.assertEqual(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [5,0,-1,3]
+        peaks = [5,3]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [5,0,-1,3]
+        a.reverse()
+        peaks = [5,3]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [0,2,4,-1]
+        peaks = [4]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [0,2,4,-1]
+        a.reverse()
+        peaks = [4]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [4,10,3,5,0,-1,0]
+        peaks = [10,5,0]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [4,10,3,5,0,-1,0]
+        a.reverse()
+        peaks = [10,5,0]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+
+    def test_peakfind_2d_column(self):
+        a = [[1]]
+        peaks = 1
+        peak = peakfinder_2d(a)
+        self.assertEqual(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[x] for x in [1,2,3,4]]
+        peaks = 4
+        peak = peakfinder_2d(a)
+        self.assertEqual(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[x] for x in [4,3,2,1]]
+        peaks = 4
+        peak = peakfinder_2d(a)
+        self.assertEqual(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[x] for x in [5,0,-1,3]]
+        peaks = [5,3]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[x] for x in [5,0,-1,3]]
+        a.reverse()
+        peaks = [5,3]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[x] for x in [0,2,4,-1]]
+        peaks = [4]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[x] for x in [0,2,4,-1]]
+        a.reverse()
+        peaks = [4]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[x] for x in [4,10,3,5,0,-1,0]]
+        peaks = [10,5,0]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[x] for x in [4,10,3,5,0,-1,0]]
+        a.reverse()
+        peaks = [10,5,0]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+
+    def test_peakfind_2d(self):
+
+        a = [[0, 1],
+            [1, 1]]
+        peaks = [1]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[-1, 5],
+            [2, 4]]
+        peaks = [5]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9]]
+        peaks = [6,12,4]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9]]
+        a.reverse()
+        peaks = [6,12,4]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9]]
+        a = [x[::-1] for x in a]
+        peaks = [6,12,4]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+        
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9]]
+        a = [x[::-1] for x in a]
+        a.reverse()
+        peaks = [6,12,4]
+        peak = peakfinder_2d(a)
+
+    def test_peakfind_2d_2(self):
+        
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8]]
+        peaks = [6,12,4,2,8]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8]]
+        peaks = [6,12,4,2,8]
+        a.reverse()
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8]]
+        peaks = [6,12,4,2,8]
+        a = [x[::-1] for x in a]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+        
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8]]
+        peaks = [6,12,4,2,8]
+        a = [x[::-1] for x in a]
+        a.reverse()
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+    def test_peakfind_2d_3(self):
+        
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8],
+            [9, 1, 1, 4, 2]]
+        peaks = [6,12,4,8,9]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8],
+            [9, 1, 1, 4, 2]]
+        peaks = [6,12,4,8,9]
+        a.reverse()
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8],
+            [9, 1, 1, 4, 2]]
+        peaks = [6,12,4,8,9]
+        a = [x[::-1] for x in a]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+        
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8],
+            [9, 1, 1, 4, 2]]
+        peaks = [6,12,4,8,9]
+        a = [x[::-1] for x in a]
+        a.reverse()
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+
+    def test_peakfind_2d_3(self):
+        
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8],
+            [9, 1, 1, 4, 2],
+            [13, 3, 4, 4, -1]]
+        peaks = [6,12,4,8,13]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8],
+            [9, 1, 1, 4, 2],
+            [13, 3, 4, 4, -1]]
+        peaks = [6,12,4,8,13]
+        a.reverse()
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8],
+            [9, 1, 1, 4, 2],
+            [13, 3, 4, 4, -1]]
+        peaks = [6,12,4,8,13]
+        a = [x[::-1] for x in a]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+        
+        a = [[0, 4, 6, 5, 12],
+            [-1, 4, 2, 8, 9],
+            [2, 0, 0, 8, 8],
+            [9, 1, 1, 4, 2],
+            [13, 3, 4, 4, -1]]
+        peaks = [6,12,4,8,13]
+        a = [x[::-1] for x in a]
+        a.reverse()
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+    def test_peakfind_2d_4(self):
+
+        a = [[0 , 1],
+            [4  , 4],
+            [2  ,3],
+            [5  ,6],
+            [-1 ,-2]]
+        peaks = [4,6]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0 , 1],
+            [4  , 4],
+            [2  ,3],
+            [5  ,6],
+            [-1 ,-2]]
+        peaks = [4,6]
+        a.reverse()
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+        a = [[0 , 1],
+            [4  , 4],
+            [2  ,3],
+            [5  ,6],
+            [-1 ,-2]]
+        peaks = [4,6]
+        a = [x[::-1] for x in a]
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+        
+        a = [[0 , 1],
+            [4  , 4],
+            [2  ,3],
+            [5  ,6],
+            [-1 ,-2]]
+        peaks = [4,6]
+        a = [x[::-1] for x in a]
+        a.reverse()
+        peak = peakfinder_2d(a)
+        self.assertIn(peak, peaks, "Wrong peak {0}; expected {1}".format(peak,peaks))
+
+
 
 if __name__ == "__main__":
     unittest.main()

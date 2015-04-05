@@ -44,11 +44,19 @@ def peakfinder_2d(array):
     @exception: raised if the array is empty
     """
     rows = len(array)
-    columns = len(array[0]) if type(array[0]) is list  else 0
+    if rows == 0:
+        raise ValueError("Array argument should not be empty.")
+
+    columns = len(array[0]) if type(array[0]) is list else 0
 
     # This is a single list. Interpreted as a single column
-    if columns ==  0:
-        return max(array)
+    if columns ==  0: 
+        if type(array[0]) is not list:
+            return max(array)
+        elif len(array[0]) > 0:
+            return max(array[0])
+        else:
+            raise ValueError("Array argument should not be empty.")
 
     # This is a list with list elements of length 1. So also a single column
     # but one that requires some preprocessing.
@@ -67,7 +75,7 @@ def peakfinder_2d(array):
     # lower half of the of the matrix.
     #
     if(array[rows/2-1][index] >= array[rows/2][index]):
-        return peakfinder_2d(array[:rows/2-1])
+        return peakfinder_2d(array[:rows/2])
 
     elif(array[rows/2+1][index] >= array[rows/2][index]):
         return peakfinder_2d(array[rows/2+1:])
